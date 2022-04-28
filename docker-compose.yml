@@ -1,0 +1,84 @@
+version: '3'
+
+services:
+  client:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+
+  comments:
+    environment:
+          - CHOKIDAR_USEPOLLING=true
+    build: 
+      context: ./comments
+      dockerfile: Dockerfile
+    ports:
+      - '4001:4001'
+    volumes:
+      - /app/node_modules
+      - ./comments:/app
+    depends_on:
+      - event-bus
+
+  event-bus:
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build: 
+      context: ./event-bus
+      dockerfile: Dockerfile
+    ports:
+      - '4005:4005'
+    volumes:
+      - /app/node_modules
+      - ./event-bus:/app
+  moderation:
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build: 
+      context: ./moderation
+      dockerfile: Dockerfile
+    ports:
+      - '4003:4003'
+    volumes:
+      - /app/node_modules
+      - ./moderation:/app
+    depends_on:
+      - event-bus
+
+  posts:
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build: 
+      context: ./posts
+      dockerfile: Dockerfile
+    ports:
+      - '4000:4000'
+    volumes:
+      - /app/node_modules
+      - ./posts:/app
+    depends_on:
+      - event-bus
+
+  query:
+    environment:
+        - CHOKIDAR_USEPOLLING=true
+    build: 
+      context: ./query
+      dockerfile: Dockerfile
+    ports:
+      - '4002:4002'
+    volumes:
+      - /app/node_modules
+      - ./query:/app
+    depends_on:
+      - event-bus
+
+      
