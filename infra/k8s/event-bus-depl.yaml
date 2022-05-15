@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: event-bus
-          image: bailey8/event-bus:latest
+          image: bailey8/event-bus
 ---
 apiVersion: v1
 kind: Service

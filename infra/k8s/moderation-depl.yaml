@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: moderation
-          image: bailey8/moderation:latest
+          image: bailey8/moderation
 ---
 apiVersion: v1
 kind: Service

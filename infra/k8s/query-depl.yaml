@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: query
-          image: bailey8/query:latest
+          image: bailey8/query
 ---
 apiVersion: v1
 kind: Service
